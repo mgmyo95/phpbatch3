@@ -44,10 +44,20 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 for($x = 0 ; $x < $countfiles ; $x++){
                     $uploaddir = "./assets/";
                     $filename = $_FILES['profile']['name'][$x];
-                    $uploadfile = $uploaddir.basename($filename);  // ./assets/dog1.jpg 
-                    $profile = $uploadfile;  // ./assets/dog1.jpg
-                    $uploadtype = end(explode(".",$filename));
-                    $uploadtype = strtolower($uploadtype);  //jpg
+
+                    // $uploadfile = $uploaddir.basename($filename);  // ./assets/dog1.jpg
+
+                    // $getformat = explode(".",$filename);   //['cutedog1','jpg']
+                    // $newfilename = round(microtime(true)).".".end($getformat);  //183888433.jpg
+                    // $uploadfile = $uploaddir.basename($newfilename); //./assets/183888433.jpg
+
+                    $getfilecode = uniqid()."_".time();
+                    $getextension = pathinfo($filename,PATHINFO_EXTENSION);  //jpg
+                    $newfilename = $getfilecode.".".basename($getextension); //assets/649ab006d8bc8_1687859206.jpg
+                    $uploadfile = $uploaddir.basename($newfilename);  //649aafa1b0e9f.jpg
+
+                    $uploadtype = explode(".",$filename);
+                    $uploadtype = strtolower(end($uploadtype));  //jpg
                     $allowextensitions = ["jpg","jpeg","png","gif"];
                     $filesize = $_FILES['profile']['size'][$x];
                     $filetmp = $_FILES['profile']['tmp_name'][$x];

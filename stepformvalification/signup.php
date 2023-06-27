@@ -1,3 +1,12 @@
+<?php 
+// echo microtime();
+// echo microtime(true);
+// echo round(microtime(1));
+
+echo uniqid();
+
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
