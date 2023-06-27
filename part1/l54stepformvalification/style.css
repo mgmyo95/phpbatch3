@@ -72,6 +72,12 @@ input.invalid{
     border:1px dotted red;
 }
 
+
+.form-check-input{
+    width:auto;
+    display:inline;
+}
+
 .d-flex{
     display:flex;
     justify-content:end;

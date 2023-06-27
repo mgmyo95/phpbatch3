@@ -1,4 +1,6 @@
 <?php 
+//Note :: Cookies store on User's Current Browser
+//Cookie ka browser mhar store
 // echo time();
 // echo "<br/>";
 //         //  s  m hr day

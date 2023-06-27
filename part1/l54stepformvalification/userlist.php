@@ -1,6 +1,16 @@
 <?php 
 ini_set('display_errors',1);
+
+session_start();
+
 require_once "./dbconnect.php";
+
+
+if(!isset($_SESSION['email']) && !isset($_SESSION['password'])){
+  header("Location:./../signup.php");
+};
+
+
 
 try{
     $stmt = $conn -> prepare("SELECT id,profile,firstname,lastname,email,dob,phone,address FROM users");
@@ -53,7 +63,7 @@ $conn = null;
                             <td><?php echo "{row['id']}" ?></td>
                             <td>
                                 <img src="<?= "{$row['profile']}" ?>" style="width:25px;height:25px;border-radius:50%;" alt="">
-                                <?= "{row['firstname']}" "{row['lastname']}" ?>
+                                <?= "{row['firstname']} {row['lastname']}" ?>
                             </td>
                             <td><?php echo "{row['email']}" ?></td>
                             <td><?php echo "{row['password']}" ?></td>

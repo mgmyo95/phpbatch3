@@ -1,20 +1,23 @@
 <?php 
 ini_set("display_errors",1);
+
+session_start();
+
 require_once "./dbconnect.php";
+
 
 //sudo chmod 777 -R assets/
 
 if($_SERVER("REQUEST_METHOD") === "POST"){
     // echo "Hello";
     
-    $getfirstname = textfilter($_POST['frstname']);
+    $getfirstname = textfilter($_POST['firstname']);
     $getlastname = textfilter($_POST['lastname']);
     $getemail = textfilter($_POST['email']);
     $getpassword = md5(textfilter($_POST['password']));
     $getdob = textfilter($_POST['dob']);
     $getphone = textfilter($_POST['phone']);
     $getaddress = textfilter($_POST['address']);
-    // $getprofile = textfilter($_POST['profile']);
 
     // echo $getfirstname;
     // echo $getlastname;
@@ -79,10 +82,19 @@ if($_SERVER("REQUEST_METHOD") === "POST"){
             $dob = $getdob;
             $phone = $getphone;
             $address = $getaddress;
-            $profile = $getprofile;
+        
 
-            $stmt -> execute();
-            echo "New Record Created Successfully";
+            // $stmt -> execute();
+
+            if($stmt->execute()){
+                $_SESSION['email'] = $email;
+                $_SESSION['password'] = $password;
+                header("location:./planncohomedecoration/index.php");
+            }else{
+                echo "Try Again";
+            }
+
+            // echo "New Record Created Successfully";
 
 
         }catch(PDOException $e){

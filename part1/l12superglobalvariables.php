@@ -59,6 +59,10 @@ echo "<hr/>";
 echo $_SERVER['SCRIPT_NAME']; ///phpbatch3/part1/l12superglobalvariables.php
 echo "<hr/>";
 
+//http://localhost/phpbatch3/part1/l12superglobalvariables.php?aungaung
+echo $_SERVER['QUERY_STRING'];  //aung aung
+echo "<hr/>";
+
 
 
 
