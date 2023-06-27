@@ -1,3 +1,12 @@
+<?php 
+// echo microtime();
+// echo microtime(true);
+// echo round(microtime(1));
+
+echo uniqid();
+
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -22,13 +31,11 @@
                 <label for="email">Secuity :</label>
                 <input type="email" name="email" id="email" class="form-control" placeholder="Enter Email" autocomplete="off" />
                 <input type="password" name="password" id="password" class="form-control" placeholder="Enter Password" />
-
+                
                 <div>
                     <input type="radio" name="newsletter" id="agree" class="form-check-input" value="1" checked /><label for="agree" class="form-check-label">I agree to get new letters</label>
-
                     <br/>
-
-                    <input type="radio" name="newsletter" id="noagree" class="form-check-input" value="0" checked /><label for="noagree" class="form-check-label">I do not agree to get new letters</label>
+                    <input type="radio" name="newsletter" id="noagree" class="form-check-input" value="0" /><label for="noagree">I do not agree to get new letters</label>
                 </div>
             </div>
 
@@ -55,11 +62,9 @@
                 <input type="text" name="address" id="address" class="form-control" placeholder="Enter Detail Address" autocomplete="off" />
 
                 <div>
-                    <input type="checkbox" name="documents[]" id="docnrc" class="form-check-input" value="nrc" checked /><label for="docnrc" class="form-check-label">I agree to get new letters</label>
-
+                    <input type="checkbox" name="documents[]" id="docnrc" class="form-check-input" value="nrc"  /><label for="docnrc" class="form-check-label">I have NRC</label>
                     <br/>
-
-                    <input type="checkbox" name="documents[]" id="docpassport" class="form-check-input" value="passport" checked /><label for="docpassport" class="form-check-label">I do not agree to get new letters</label>
+                    <input type="checkbox" name="documents[]" id="docpassport" class="form-check-input" value="passport" /><label for="docpassport">I have passport</label>
                 </div>
                 
             </div>

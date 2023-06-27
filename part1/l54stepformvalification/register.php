@@ -1,16 +1,13 @@
 <?php 
-ini_set("display_errors",1);
-
+ini_set('display_errors',1);
 session_start();
-
 require_once "./dbconnect.php";
-
 
 //sudo chmod 777 -R assets/
 
-if($_SERVER("REQUEST_METHOD") === "POST"){
+if($_SERVER['REQUEST_METHOD'] === 'POST'){
     // echo "Hello";
-    
+
     $getfirstname = textfilter($_POST['firstname']);
     $getlastname = textfilter($_POST['lastname']);
     $getemail = textfilter($_POST['email']);
@@ -18,18 +15,21 @@ if($_SERVER("REQUEST_METHOD") === "POST"){
     $getdob = textfilter($_POST['dob']);
     $getphone = textfilter($_POST['phone']);
     $getaddress = textfilter($_POST['address']);
+    echo "<br/>";
 
     // echo $getfirstname;
-    // echo $getlastname;
-    // echo $getemail;
-    // echo $getpassword;
-    // echo $getdob;
-    // echo $getphone;
-    // echo $getaddress;
+    // echo $getlastname . "<br/>";
+    // echo $getemail . "<br/>";
+    // echo $getpassword . "<br/>";
+    // echo $getdob . "<br/>";
+    // echo $getphone . "<br/>";
+    // echo $getaddress . "<br/>";
 
     if($getemail && $getpassword){
+
         try{
             $stmt = $conn -> prepare("INSERT INTO users(profile,firstname,lastname,email,password,dob,phone,address) VALUE(:profile,:firstname,:lastname,:email,:password,:dob,:phone,:address)");
+
             $stmt -> bindParam(":profile",$profile);
             $stmt -> bindParam(":firstname",$firstname);
             $stmt -> bindParam(":lastname",$lastname);
@@ -45,32 +45,45 @@ if($_SERVER("REQUEST_METHOD") === "POST"){
                 for($x = 0 ; $x < $countfiles ; $x++){
                     $uploaddir = "./assets/";
                     $filename = $_FILES['profile']['name'][$x];
-                    $uploadfile = $uploaddir.basename($filename);  //assets/dob1.jpg 
+
+                    // $uploadfile = $uploaddir.basename($filename);  // ./assets/dog1.jpg
+
+                    // $getformat = explode(".",$filename);   //['cutedog1','jpg']
+                    // $newfilename = round(microtime(true)).".".end($getformat);  //183888433.jpg
+                    // $uploadfile = $uploaddir.basename($newfilename); //./assets/183888433.jpg
+
+                    $getfilecode = uniqid()."_".time();
+                    $getextension = pathinfo($filename,PATHINFO_EXTENSION);  //jpg
+                    $newfilename = $getfilecode.".".basename($getextension); //assets/649ab006d8bc8_1687859206.jpg
+                    $uploadfile = $uploaddir.basename($newfilename);  //649aafa1b0e9f.jpg
+
                     $uploadtype = explode(".",$filename);
-                    $uploadtype = strtolower(end($uploadtype)); //jpg
+                    $uploadtype = strtolower(end($uploadtype));  //jpg
                     $allowextensitions = ["jpg","jpeg","png","gif"];
                     $filesize = $_FILES['profile']['size'][$x];
                     $filetmp = $_FILES['profile']['tmp_name'][$x];
-
                     $errors = [];
 
                     //check extension 
-                    if(in_array($uploadtpe,$allowextensitions) === false){
-                        $errors[] = "Sorry , we just allowed JPG,JPEG,PNG & GIF files type";
+                    if(in_array($uploadtype,$allowextensitions) === false){
+                        $errors[] = "Sorry , We just allowed JPG,JPEG,PND & GIT files types.";
                     }
 
                     //check size 
-                    if($filesize > 300000){
-                        $errors[] = "Sorry , Your file size is too large";
+                    if($filesize > 3000000){
+                        $errors[] = "Sorry , Your file is too large.";
                     }
+
 
                     //upload
                     if(empty($errors) === true){
-                        move_uploaded_file($filetmp,$uplodfile);
+                        move_uploaded_file($filetmp,$uploadfile);
+                        $profile = $uploadfile;
                         echo "File Successfully Uploaded.";
                     }else{
                         echo "<pre>".print_r($errors,true)."</pre>";
                     }
+
 
                 }
             }
@@ -82,19 +95,17 @@ if($_SERVER("REQUEST_METHOD") === "POST"){
             $dob = $getdob;
             $phone = $getphone;
             $address = $getaddress;
-        
 
             // $stmt -> execute();
+            echo "New records created successfully";
 
             if($stmt->execute()){
                 $_SESSION['email'] = $email;
                 $_SESSION['password'] = $password;
-                header("location:./planncohomedecoration/index.php");
+                header("Location:./planncohomedecoration/index.php");
             }else{
                 echo "Try Again";
             }
-
-            // echo "New Record Created Successfully";
 
 
         }catch(PDOException $e){
@@ -102,11 +113,11 @@ if($_SERVER("REQUEST_METHOD") === "POST"){
         }
 
         $conn = null;
+
     }
 
-
-
-}
+    
+};
 
 function textfilter($data){
     $data = trim($data);
@@ -115,20 +126,6 @@ function textfilter($data){
     return $data;
 }
 
+
+
 ?>
-
-
-<!-- CREATE TABLE IF NOT EXISTS users(
-    id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    profile VARCHAR(255),
-    firstname VARCHAR(20),
-    lastname VARCHAR(20),
-    email VARCHAR(30) UNIQUE,
-    password VARCHAR(255),
-    dob DATE,
-    phone VARCHAR(13),
-    address VARCHAR(100)
-); 
-DESC users;
-SHOW INDEX FROM users;
--->

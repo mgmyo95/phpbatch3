@@ -122,7 +122,7 @@ input.invalid{
 }
 
 #userlist-container{
-    width:90%;
+    width:100%;
 }
 
 #userlist-container table{
@@ -137,6 +137,7 @@ input.invalid{
 }
 
 #userlist-container table td{
+    font-size:14px;
     padding:10px 0;
     border-bottom:1px solid #333;
 }

@@ -1,14 +1,26 @@
+<?php 
+session_start();
+
+if(isset($_SESSION['count'])){
+    $_SESSION['count']++;
+}else{
+    $_SESSION['count'] = 1;
+};
+
+echo "idx count = " . $_SESSION['count'];
+
+?>
+
+<!DOCTYPE html>
 <html>
     <head>
-        <title>Cookies</title>
+        <title>Session</title>
     </head>
     <body>
-        
+    
         <ul>
-            <li><a href="./setcookie.php" target="_blank">Set Cookies</a></li>
-            <li><a href="./readcookie.php" target="_blank">Read Cookies</a></li>
-            <li><a href="./deletecookie.php" target="_blank">Delete Cookies</a></li>
-            <li><a href="./part2/cookieset2.php" target="_blank">Cookiesset2</a></li>
+            <li><a href="exercise.php">Set Session</a></li>
+            <li><a href="destroysession.php" target="_blank">Delete Session</a></li>
         </ul>
 
 

@@ -1,10 +1,10 @@
 <?php 
 
-session_start();
+  session_start();
 
-if(!isset($_SESSION['email']) && !isset($_SESSION['password'])){
-  header("Location:./../signup.php");
-};
+  if(!isset($_SESSION['email']) && !isset($_SESSION['password'])){
+      header("Location:./../signup.php");
+  };
 
 ?>
 
@@ -58,8 +58,8 @@ if(!isset($_SESSION['email']) && !isset($_SESSION['password'])){
             <li class="nav-list"><a href="#services" class="nav-link menuitems">Services</a></li>
             <li class="nav-list"><a href="#customer" class="nav-link menuitems">Customer</a></li>
             <li class="nav-list"><a href="#furniture" class="nav-link menuitems">Furniture</a></li>
-            <li class="nav-list"><a href="./../logout.php" class="nav-link menuitems">Contact</a></li>
-            <li class="nav-list"><a href="#contact" class="nav-link menuitems">Logout</a></li>
+            <li class="nav-list"><a href="#contact" class="nav-link menuitems">Contact</a></li>
+            <li class="nav-list"><a href="./../logout.php" class="nav-link menuitems">Logout</a></li>
           </ul>
         </div>
       </nav>
