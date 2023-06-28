@@ -1,10 +1,14 @@
 <?php 
 
-  session_start();
+  // session_start();
 
-  if(!isset($_SESSION['email']) && !isset($_SESSION['password'])){
-      header("Location:./../signup.php");
-  };
+  // if(!isset($_SESSION['email']) && !isset($_SESSION['password'])){
+  //     header("Location:./../signup.php");
+  // };
+  require_once "./../sessionconfig.php";
+  if(authfailed()){
+    redirectto("./../signin.php");
+}
 
 ?>
 

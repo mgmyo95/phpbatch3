@@ -1,13 +1,18 @@
 <?php 
 ini_set("display_errors",1);
 
-session_start();
+// session_start();
 
 require_once "./dbconnect.php";
+require_once "./sessionconfig.php";
 
-if(!isset($_SESSION['email']) && !isset($_SESSION['password'])){
-    header("Location:./signup.php");
-};
+// if(!isset($_SESSION['email']) && !isset($_SESSION['password'])){
+//     header("Location:./signup.php");
+// };
+
+if(authfailed()){
+    redirectto("./signin.php");
+}
 
 try{
     $stmt = $conn -> prepare("SELECT id,profile,firstname,lastname,email,dob,phone,address FROM users");

@@ -24,7 +24,7 @@ echo uniqid();
             <span class="dot"></span>
          </div>
 
-         <form id="form" action="./register.php" method="POST" enctype="multipart/form-data">
+         <form id="form" action="./registerfunction.php" method="POST" enctype="multipart/form-data">
             <h1>Register With Us</h1>
 
             <div class="page">
@@ -62,9 +62,11 @@ echo uniqid();
                 <input type="text" name="address" id="address" class="form-control" placeholder="Enter Detail Address" autocomplete="off" />
 
                 <div>
-                    <input type="checkbox" name="documents[]" id="docnrc" class="form-check-input" value="nrc"  /><label for="docnrc" class="form-check-label">I have NRC</label>
+                    <input type="checkbox" name="documents[]" id="docnrc" class="form-check-input" value="nrc" /><label for="docnrc" class="form-check-label">I have NRC</label>
+
                     <br/>
-                    <input type="checkbox" name="documents[]" id="docpassport" class="form-check-input" value="passport" /><label for="docpassport">I have passport</label>
+
+                    <input type="checkbox" name="documents[]" id="docpassport" class="form-check-input" value="passport" /><label for="docpassport" class="form-check-label">I have passport</label>
                 </div>
                 
             </div>
@@ -73,6 +75,8 @@ echo uniqid();
                 <button type="button" id="prevbtn" class="btn" onclick="gonow(-1)">Previous</button>
                 <button type="button" id="nextbtn" class="btn" onclick="gonow(1)">Next</button>
             </div>
+
+            <p>Already register ? <a href="./signin.php">Signin Here !!!</a></p>
 
          </form>
 

@@ -1,7 +1,8 @@
 <?php 
 ini_set('display_errors',1);
-session_start();
+// session_start();
 require_once "./dbconnect.php";
+require_once "./sessionconfig.php";
 
 //sudo chmod 777 -R assets/
 
@@ -15,6 +16,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $getdob = textfilter($_POST['dob']);
     $getphone = textfilter($_POST['phone']);
     $getaddress = textfilter($_POST['address']);
+    $getnewsletter = textfilter($_POST['newsletter']);
     echo "<br/>";
 
     // echo $getfirstname;
@@ -28,7 +30,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     if($getemail && $getpassword){
 
         try{
-            $stmt = $conn -> prepare("INSERT INTO users(profile,firstname,lastname,email,password,dob,phone,address) VALUE(:profile,:firstname,:lastname,:email,:password,:dob,:phone,:address)");
+            $stmt = $conn -> prepare("INSERT INTO users(profile,firstname,lastname,email,password,dob,phone,address,newsletter,documents) VALUES(:profile,:firstname,:lastname,:email,:password,:dob,:phone,:address,:newsletter,:documents)");
 
             $stmt -> bindParam(":profile",$profile);
             $stmt -> bindParam(":firstname",$firstname);
@@ -38,6 +40,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             $stmt -> bindParam(":dob",$dob);
             $stmt -> bindParam(":phone",$phone);
             $stmt -> bindParam(":address",$address);
+            $stmt -> bindParam(":newsletter",$newsletter);
+            $stmt -> bindParam(":documents",$documents);
 
             $countfiles = count($_FILES['profile']['name']);
 
@@ -95,14 +99,31 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             $dob = $getdob;
             $phone = $getphone;
             $address = $getaddress;
+            $newsletter = $getnewsletter;
+
+            $getdocuments = NULL;
+
+            if(isset($_POST['documents'])){
+                $docs = $_POST['documents'];
+
+                foreach($docs as $doc){
+                    $getdocuments .= $doc.",";
+                    echo $getdocuments;
+                }
+            }
+
+            $documents = $getdocuments;
 
             // $stmt -> execute();
             echo "New records created successfully";
 
             if($stmt->execute()){
-                $_SESSION['email'] = $email;
-                $_SESSION['password'] = $password;
-                header("Location:./planncohomedecoration/index.php");
+                // $_SESSION['email'] = $email;
+                // $_SESSION['password'] = $password;
+                // header("Location:./planncohomedecoration/index.php");
+                setsession('email',$email);
+                setsession('password',$password);
+                redirectto('./planncohomedecoration/index.php');
             }else{
                 echo "Try Again";
             }
@@ -129,3 +150,19 @@ function textfilter($data){
 
 
 ?>
+
+
+<!-- CREATE TABLE IF NOT EXISTS users(
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    profile VARCHAR(255),
+    firstname VARCHAR(50),
+    lastname VARCHAR(50),
+    email VARCHAR(100) UNIQUE,
+    password VARCHAR(100),
+    dob DATE,
+    phone VARCHAR(50),
+    address VARCHAR(100)
+);
+
+DESC users;
+SHOW INDEX FROM users; -->
