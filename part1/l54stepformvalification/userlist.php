@@ -66,7 +66,7 @@ $conn = null;
 
                                 <?= "{$row['firstname']} {$row['lastname']}" ?>
                             </td>
-                            <td><?= "{$row['firstname']} {$row['lastname']}" ?></td>
+                            <!-- <td><?= "{$row['firstname']} {$row['lastname']}" ?></td> -->
                             <td><?= "{$row['email']}" ?></td>
                             <td><?= "{$row['dob']}" ?></td>
                             <td><?= "{$row['phone']}" ?></td>
