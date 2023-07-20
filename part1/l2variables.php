@@ -76,6 +76,77 @@ echo $firstname.' '.$lastname;
  comment 2
  comment 3 */
 
+ echo "<hr/>";
+
+ //------------------------ 
+
+ //=>constant Variable
+
+//define function()
+//const keyword 
+
+//define('variablename','value');
+//string/int/boolean/float oki 
+//variable name should be uppercase
+//redefine are deny 
+
+define('FULLNAME','Honey Nway Oo');
+echo FULLNAME; //Honey Nway Oo 
+
+echo "<br/>";
+
+define('FULLNAME','Ma Ma Mya');
+echo FULLNAME; //Honey Nway Oo 
+
+echo "<br/>";
+
+define('DB_HOST','localhost');
+define('DB_USER','root');
+define('DB_PASS','');
+define('DB_NAME','phpdbone');
+
+echo DB_HOST;
+echo "<br/>";
+echo DB_USER;
+echo "<br/>";
+echo DB_PASS;
+echo "<br/>";
+echo DB_NAME;
+echo "<br/>";
+
+//=>constant('name')function 
+
+echo constant('DB_HOST');
+echo "<br/>";
+echo constant('DB_USER');
+echo "<br/>";
+echo constant('DB_PASS');
+echo "<br/>";
+echo constant('DB_NAME');
+echo "<br/>";
+
+//=>constant : const keyword 
+//Note 
+//string/int/boolean/float oki 
+//variable name should be uppercase
+//redefine are deny 
+
+const MESSAGE = "Hello Sir , are you ready to lean PHP OOP concept ??";
+echo MESSAGE;
+echo "<br/>";
+echo constant('MESSAGE');
+echo "<br/>";
+
+const MESSAGE = "Are you ready to lean Javascript ES6 concept ??";
+echo MESSAGE;
+echo "<br/>";
+echo constant('MESSAGE');
+echo "<br/>";
+
+
+
+
+
 ?>
 
 <!-- 20IN; -->
