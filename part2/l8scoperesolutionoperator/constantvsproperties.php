@@ -2,6 +2,9 @@
 
 class constantvsproperties{
 
+    //self keyword and private can't overwrite in inheritance class 
+    //static keyword can overwirte in inheritance class
+
     const ARTICLE = "This is new article for SPORT.";
     const TOPIC = "This is new topic for SPORT";
     public $post = "This is new post for SPORT.";  //*** public and protected can overwrite // private can't overwrite 

@@ -93,7 +93,7 @@ echo "<br/>";
 echo "<br/>";
 // echo $ch1 -> sayhi();  //Hello FrienD. Good evening from Thailand
 echo "<br/>";
-// echo $ch1 -> saybye();  //Hi friend. Thanks for visiting our country.
+// echo $ch1 -> saythank();  //Hi friend. Thanks for visiting our country.
 echo "<hr/>";
 
 echo "This is Scrop Resolution Operator Child 2<br/>";
