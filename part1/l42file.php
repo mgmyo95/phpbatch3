@@ -190,6 +190,7 @@
 //Show all .txt file 
 // echo "<pre>".print_r(glob("*.*"),true)."<pre>";
 // echo "<pre>".print_r(glob("*l46file.txt"),true)."<pre>";
+// echo "<pre>".print_r(glob("./part1/*.*"),true)."</pre>";
 echo "<pre>".print_r(glob("l46file.txt"),true)."<pre>";
 
 ?>

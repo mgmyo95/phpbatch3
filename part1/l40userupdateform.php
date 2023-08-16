@@ -13,7 +13,7 @@
     die("Connection Failed : " . $conn -> connect_error);
    }
 
-   $sql = "SELECT id,name,email FROM users";
+   $sql = "SELECT id,name,email FROM userinfo";
    $result = $conn -> query($sql);
 //    echo $result -> num_rows;
 

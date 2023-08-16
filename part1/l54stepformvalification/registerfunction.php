@@ -63,7 +63,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
                     $uploadtype = explode(".",$filename);
                     $uploadtype = strtolower(end($uploadtype));  //jpg
-                    $allowextensitions = ["jpg","jpeg","png","gif"];
+                    $allowextensitions = ["jpg","jpeg","png","git"];
                     $filesize = $_FILES['profile']['size'][$x];
                     $filetmp = $_FILES['profile']['tmp_name'][$x];
                     $errors = [];
