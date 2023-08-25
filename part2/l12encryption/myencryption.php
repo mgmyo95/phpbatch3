@@ -5,6 +5,16 @@ interface encrypt{
     public function passworddef();
     public function passwordbcr();
     public function passwordvry();
+    public function strongpassword();
+    public function passwordrehash();
+
+    public function getciphermethod();
+    public function customencrypt();
+    public function customdecrypt();
+
+    public function gethashingalgorithm();
+    public function customstrongencrypt();
+    public function customstrongdecrypt();
 }
                     // keyword
 // password_hash(string,mixed)
@@ -27,6 +37,7 @@ class myencryption implements encrypt{
         $newpasscode = password_hash($this -> passcode,PASSWORD_DEFAULT);
 
         echo "This is before encrypt  {$this -> passcode} <br/> and after encrypt $newpasscode <br/>";
+        
 
     }
 
@@ -35,6 +46,8 @@ class myencryption implements encrypt{
         $newpasscode = password_hash($this -> passcode,PASSWORD_BCRYPT);
 
         echo "This is before encrypt  {$this -> passcode} <br/> and after encrypt $newpasscode <br/>";
+
+        echo strlen($newpasscode) . "<br/>"; //60
 
     }
 
@@ -56,6 +69,24 @@ class myencryption implements encrypt{
             echo "OKI";
         }else{
             echo "Failed";
+        }
+
+    }
+
+    public function passwordrehash(){
+        $plaintext = "password123";
+        $enccode = password_hash($plaintext,PASSWORD_DEFAULT);   
+        echo "Password hash with PASSWORD_DEFAULT = " . $enccode . "<br/>";
+
+        //['const'] keyword 
+
+        if(password_needs_rehash($enccode,PASSWORD_DEFAULT,['cost'=>12])){
+            $rehashed = password_hash($plaintext,PASSWORD_DEFAULT,['cost'=>12]);
+            echo $rehashed;
+            echo "<br/>";
+            echo strlen($rehashed) . "<br/>"; //60
+        }else{
+            echo "No Neet to rehash";
         }
 
     }
@@ -82,7 +113,7 @@ class myencryption implements encrypt{
         }elseif($getpassword === md5($passcode,TRUE)){
             echo "Password Match with md5 16 chars binary number";
         }else{
-            echo "Password do not match";
+            echo "Password Match with md5 16 chars binary number";
         }
 
         //  if($getpassword === md5($passcode)){
@@ -130,6 +161,7 @@ class myencryption implements encrypt{
         // $cryptkey = "accdwerewd";  //Password do not match
         echo "Before encrypt with crypt = " . $passcode . "<br/>";
         echo "After encrypt with crypt = " . crypt($passcode,$cryptkey) . "<hr/>";
+        echo strlen(crypt($passcode,$cryptkey));
 
         $getpassword = "12HfyUaX52St6";
 
@@ -140,6 +172,97 @@ class myencryption implements encrypt{
         }
 
     }
+
+    public function strongpassword(){
+        $passcode = "ilovemyjob";
+        $newpassword = md5($passcode);
+        $newpassword = sha1($newpassword);
+        $newpassword = crypt($newpassword,$newpassword);
+
+        echo "Before encrypt = " . $passcode . "<br/>";
+        echo "After encrypt = " . $newpassword . "<br/>";
+        echo "After encrypt by single line = " . md5(sha1(crypt($passcode,$passcode))) . "<br/>";
+
+        $getpassword = "b87BFK8O.P4dE";
+
+        if($getpassword === md5(sha1(crypt($passcode,$passcode)))){
+            echo "Password Match";
+        }else{
+            echo "Password do not match";
+        }
+    }
+
+    public function getciphermethod(){
+        $ciphers = openssl_get_cipher_methods();
+        echo "<pre>".print_r($ciphers,true)."</pre>";
+    }
+
+    public function customencrypt(){
+        //almost use bank
+        // openssl_encrypt(p,c,p,o,iv);       
+                                           //encrypt key                        
+        // openssl_encrypt(plaintext,cipher,passphrase,options,initalization vector)
+
+        $plaintext = "ilovemyfriend";
+        echo "Before encrypt = " . $plaintext . "<br/>";
+
+        //cipher method 
+        $cipher = "aes-128-cbc";
+
+        //passphrase(encryption key)
+        $encryptionkey = "abcdefg12345";
+
+        //option
+        $options = 0;  //OPENSSL_ZERO_PADDING is equal with 0 (or) OPENSSL_RAW_DATA
+        // $options = OPENSSL_ZERO_PADDING;
+        // $options = OPENSSL_RAW_DATA;
+
+        //initalization vector
+        $iv = "12345678910";
+
+        $finalencrypt = openssl_encrypt($plaintext,$cipher,$encryptionkey,$options,$iv);
+
+        echo "After Encrypt = " . $finalencrypt . "<br/>";
+        echo strlen($finalencrypt) . "<br/>"; //24
+
+    }
+
+    public function customdecrypt(){
+
+         // openssl_encrypt(e,c,p,o,iv);       
+                                           //encrypt key                        
+        // openssl_decrypt(encrypt,cipher,passphrase,options,initalization vector)
+
+        //encrypt
+        $encrypt = "xqo4hgGDlVXzu2DiKnto3Q==";
+        //cipher
+        $cipher = "aes-128-cbc";
+        //passphrase
+        $encryptionkey = "abcdefg12345"; 
+        //option 
+        $options = 0;
+        //iv 
+        $iv = "12345678910";
+
+        $finaldecrypt = openssl_decrypt($encrypt,$cipher,$encryptionkey,$options,$iv);
+
+        echo "After Decrypt = " . $finaldecrypt . "<br/>";
+
+
+    }
+
+    public function gethashingalgorithm(){
+
+    }
+
+    public function customstrongencrypt(){
+
+    }
+
+    public function customstrongdecrypt(){
+
+    }
+    
 
 }
 
@@ -153,12 +276,41 @@ $obj -> passwordbcr();
 echo "<hr/>";
 $obj -> passwordvry();
 echo "<hr/>";
+
+$obj -> passwordrehash();
+echo "<hr/>";
+
+
 $obj -> passwordmd5();
 
 echo "<hr/>";
 $obj -> sha1();
-echo "<hr/>";
 $obj -> passwordcrypt();
+
+echo "<hr/>";
+
+$obj -> strongpassword();
+echo "<hr/>";
+
+$obj -> getciphermethod();
+
+echo "<hr/>";
+
+$obj -> customencrypt();
+echo "<hr/>";
+
+$obj -> customdecrypt();
+echo "<hr/>";
+
+$obj -> gethashingalgorithm();
+echo "<hr/>";
+
+$obj -> customstrongencrypt();
+echo "<hr/>";
+
+$obj -> customstrongdecrypt();
+echo "<hr/>";
+
 
 //=>Description
 // password_verify(string,hash);
@@ -199,6 +351,8 @@ $obj -> passwordcrypt();
 echo "<hr/>";
 
 // 16PC
+//25CH 
+//25HA
 
 ?>
 

@@ -21,7 +21,7 @@ class myproperties{
 $obj = new myproperties();
 echo "This is Class Object <br/>";
 
-echo $obj -> firstname.$obj->lastname;    //properties call don't use $
+echo $obj -> firstname . $obj->lastname;    //properties call don't use $
 
 
 
