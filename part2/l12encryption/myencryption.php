@@ -5,6 +5,7 @@ interface encrypt{
     public function passworddef();
     public function passwordbcr();
     public function passwordvry();
+
     public function strongpassword();
     public function passwordrehash();
 
@@ -78,7 +79,7 @@ class myencryption implements encrypt{
         $enccode = password_hash($plaintext,PASSWORD_DEFAULT);   
         echo "Password hash with PASSWORD_DEFAULT = " . $enccode . "<br/>";
 
-        //['const'] keyword 
+        //['cost'] keyword 
 
         if(password_needs_rehash($enccode,PASSWORD_DEFAULT,['cost'=>12])){
             $rehashed = password_hash($plaintext,PASSWORD_DEFAULT,['cost'=>12]);
@@ -86,7 +87,7 @@ class myencryption implements encrypt{
             echo "<br/>";
             echo strlen($rehashed) . "<br/>"; //60
         }else{
-            echo "No Neet to rehash";
+            echo "No Need to rehash";
         }
 
     }
@@ -197,6 +198,7 @@ class myencryption implements encrypt{
         echo "<pre>".print_r($ciphers,true)."</pre>";
     }
 
+
     public function customencrypt(){
         //almost use bank
         // openssl_encrypt(p,c,p,o,iv);       
@@ -213,7 +215,7 @@ class myencryption implements encrypt{
         $encryptionkey = "abcdefg12345";
 
         //option
-        $options = 0;  //OPENSSL_ZERO_PADDING is equal with 0 (or) OPENSSL_RAW_DATA
+        $options = 0;  //OPENSSL_ZERO_PADDING is equal with 0 (or) OPENSSL_RAW_DATA(binary code)
         // $options = OPENSSL_ZERO_PADDING;
         // $options = OPENSSL_RAW_DATA;
 
@@ -252,14 +254,74 @@ class myencryption implements encrypt{
     }
 
     public function gethashingalgorithm(){
+        $hashalgorithms = hash_hmac_algos(); //keyed-hash message authentication code
 
+        echo "<pre>".print_r($hashalgorithms,true)."</pre>";
     }
 
     public function customstrongencrypt(){
 
+        //openssl_encrypt(p,c,p,o,iv)
+
+        $plaintext = "ilovemyfriend";
+        echo "Before encrypt = " . $plaintext . "<br/>";
+
+        $cipher = "aes-128-cbc";
+        $encryptionkey = "abcdefg12345";
+        $options = 0;
+
+        $ivlen = openssl_cipher_iv_length($cipher); //is an arbitrary number 
+        echo $ivlen . "<br/>"; //16
+
+        $iv = openssl_random_pseudo_bytes($ivlen);  //to get dynamic pseudo
+        echo $iv . "<br/>";
+
+        $hash = openssl_encrypt($plaintext,$cipher,$encryptionkey,$options,$iv);
+        // echo "After encrypt = " . $finalencrypt . "<br/>";
+        // echo strlen($finalencrypt); //32
+
+        //hash_hmac(a,h,p,h)  hmax=hash method authentication code 
+        //hash_hmac(algorithm,hash,pasphrase,binary)
+        $hmac = hash_hmac("sha256",$hash,$encryptionkey,true); //true = raw binary number data, false = lowercase husl
+
+        echo $hmac . "<br/>";
+        echo strlen($hmac) . "<br/>";  //32
+
+        $finalencrypt = base64_encode($iv.$hmac.$hash);
+        echo "After Decrypt = " . $finalencrypt . "<br/>";
+        echo strlen($finalencrypt) . "<br/>";
+
     }
 
     public function customstrongdecrypt(){
+
+        // openssl_decrypt(p,c,p,o,iv);
+        $encrypted = base64_decode("XFg4icGWKkl2fzQLcoZF3kkem7fOwz1E32SZN4udO8Ik5BMgsaLXsK08virc/ucEaHo2OFRsU0pBdnZoOGphY2p1QVRZZz09");
+        // echo $encrypted . "<br/>";
+
+        $cipher = "aes-128-cbc";
+
+        $encryptionkey = "abcdefg12345";
+
+        $options = 0;
+
+        $ivlen = openssl_cipher_iv_length($cipher); //is an arbitrary number 
+        // echo $ivlen . "<br/>";  //16
+            //substr(encrypt,start,end)
+        $iv = substr($encrypted,0,$ivlen);
+        echo $iv . "<br/>";
+
+        $algolen = 32;
+                                    //16 + 32
+        $gethash = substr($encrypted,$ivlen+$algolen);
+        echo $gethash . "<br/>";
+  
+        echo strlen($gethash) . "<br/>";  //24
+
+
+        $finaldecrypt = openssl_decrypt($gethash,$cipher,$encryptionkey,$options,$iv);
+        echo "After decrypt = " . $finaldecrypt . "<br/>";
+
 
     }
     
@@ -300,6 +362,15 @@ $obj -> customencrypt();
 echo "<hr/>";
 
 $obj -> customdecrypt();
+echo "<hr/>";
+
+$obj -> gethashingalgorithm();
+echo "<hr/>";
+
+$obj -> customstrongencrypt();
+echo "<hr/>";
+
+$obj -> customstrongdecrypt();
 echo "<hr/>";
 
 $obj -> gethashingalgorithm();
@@ -354,6 +425,10 @@ echo "<hr/>";
 //25CH 
 //25HA
 
+//29SD
+
 ?>
+
+
 
 
