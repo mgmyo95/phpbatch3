@@ -280,16 +280,17 @@ class myencryption implements encrypt{
         // echo "After encrypt = " . $finalencrypt . "<br/>";
         // echo strlen($finalencrypt); //32
 
-        //hash_hmac(a,h,p,h)  hmax=hash method authentication code 
+        //hash_hmac(a,h,p,h)  hmac=hash method authentication code 
         //hash_hmac(algorithm,hash,pasphrase,binary)
         $hmac = hash_hmac("sha256",$hash,$encryptionkey,true); //true = raw binary number data, false = lowercase husl
 
         echo $hmac . "<br/>";
         echo strlen($hmac) . "<br/>";  //32
 
+                                     //concat
         $finalencrypt = base64_encode($iv.$hmac.$hash);
         echo "After Decrypt = " . $finalencrypt . "<br/>";
-        echo strlen($finalencrypt) . "<br/>";
+        echo strlen($finalencrypt) . "<br/>";  //96
 
     }
 

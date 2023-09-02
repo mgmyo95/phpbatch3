@@ -138,13 +138,34 @@ $val1 = array();
 if(empty($val1)){
     echo "Your variable 1 is empty";
 }
-echo "<br/>";
+echo "<hr/>";
 
 if(isset($val1)){
     echo "Your variable 1 is isset";
 }
 
+echo "<hr/>";
+
+
+$city = 'Yangon';
+$country = "Thailand";
+echo isset($city) ? "Yes" : "No";
 echo "<br/>";
+echo $city . "<br/>";
+echo $country . "<br/>";
+
+// unset($city);
+// unset($Yangon);
+
+unset($city,$country);
+echo $city . "<br/>";
+echo $country . "<br/>"; //Thailand
+
+echo "<hr/>";
+
+
+
+echo "<hr/>";
 
 //gettype(variable)
 $val = 50;
