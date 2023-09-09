@@ -1,18 +1,16 @@
 <?php 
-date_default_timezone_set('Asia/Yangon');
-ini_set('display_errors',1);
 
 class mymagicconstant{
 
     public function getclassname1(){
         echo __CLASS__ . "<br/>";
-    }   
+    }
 
     public function getclassname2(){
         echo get_class($this) . "<br/>";
     }
 
-    public function getfunname(){
+    public function getfunname1(){
         echo __FUNCTION__ . "<br/>";
     }
 
@@ -44,10 +42,10 @@ class mymagicconstant{
 
 trait access{
 
-    public $email = "kyaw@gmail.com";
-    private $password = "123456";
+    public $email = "honey@gmail.com";
+    public $password = "123456";
 
-    //! __trait__ must be parent trait 
+    //! __TRAIT__ must be exits parent trait
     public function gettrait(){
         echo __TRAIT__ . "<br/>";
     }
@@ -57,26 +55,32 @@ trait access{
 class auth{
     use access;
     public function login(){
-        echo "This is user login. Email is {$this -> email} and password is {$this -> password} <br/>";
+        echo "This is user login . Email is {$this -> email} & password is {$this -> password} <br/>";
     }
 }
 
-echo "This is magic constant <br/>";
+
+echo "This is Magic Constant <br/>";
 $obj = new mymagicconstant();
 $obj -> getclassname1();  //! mymagicconstant
 $obj -> getclassname2();  //! mymagicconstant
-$obj -> getfunname();  //! getfunname
-$obj -> getfunname2(); //! getfunname2
-$obj -> getmethod1();  //! mymagicconstant::getmethod1
-$obj -> getmethod2();  //! mymagicconstant::getmethod2
-$obj -> getdir();  //! C:\xampp\htdocs\phpbatch3
-$obj -> getfile();  //! C:\xampp\htdocs\phpbatch3\exercise.php
-$obj -> getline();  //! 40
+
+$obj -> getfunname1();  //! getfunname1
+$obj::getfunname2();  //! getfunname1
+
+$obj -> getmethod1();  //! mymagicconstant::getmethod1 
+$obj::getmethod2();  //!mymagicconstant::getmethod2
+
+$obj -> getdir();  //! C:\xampp\htdocs\phpbatch3\part2\l14magicconstan (working diretory folder path)
+
+$obj -> getfile();  //! C:\xampp\htdocs\phpbatch3\part2\l14magicconstan\mymagicconstant.php (working diretory file path)
+
+$obj -> getline();  //todo 38
+
 echo "<hr/>";
 
 $obj2 = new auth();
-$obj2 -> gettrait();
-
-
+$obj2 -> login();  //! This is user login . Email is honey@gmail.com & password is 123456
+$obj2 -> gettrait(); //* access
 
 ?>

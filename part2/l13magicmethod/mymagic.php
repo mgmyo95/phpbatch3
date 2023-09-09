@@ -1,5 +1,42 @@
 <?php 
 
+class mymagic{
+
+    public $num;
+    private $name;
+    protected $age;
+
+    public function __construct($val){
+        //!property_exists(classname string,propertyname string);
+
+        //  if(property_exists('mymagic','num')){
+        //      echo $this -> num = $val;
+        //  }else{
+        //      echo "Property doesn't exists";
+        //  }
+
+        //  if(property_exists($this,'num')){
+        //      echo $this -> num = $val;
+        //  }else{
+        //      echo "Property doesn't exists";
+        //  }
+
+        // if(property_exists($this,'name')){
+        //     echo $this -> num = $val;
+        //}else{
+        //     echo "Property doesn't exists";
+        // }
+
+        if(property_exists($this,'age')){
+            echo $this -> num = $val;
+        }else{
+            echo "Property doesn't exists";
+        }
+
+    }
+
+}
+
 class mymagicone{
     //properties
     //magic method (ma shi dae properties call yin working)
@@ -81,7 +118,8 @@ class mymagicsix{
 }
 
 echo "This is Magic Method <br/>";
-
+$obj = new mymagic(100);
+echo "<br/>";
 $obj = new mymagicone();
 $obj -> greeting;
 $obj -> bye = "Thank You";
@@ -116,5 +154,5 @@ echo "<hr/>";
 $obj6 = new mymagicsix();
 $sridata = serialize($obj6);
 unserialize($sridata);
-
+echo "<br/>";
 ?>
