@@ -38,13 +38,13 @@ class mymagic{
 }
 
 class mymagicone{
-    //properties
-    //magic method (ma shi dae properties call yin working)
+    //! properties
+    //! magic method (ma shi dae properties call yin working)
     public function __get($var){
         echo "You not yet defined these \"{$var}\" properties <br/>";
     }
 
-    //__set(variable,value)
+    //! __set(variable,value)
     public function __set($var,$val){
         echo "You not yet defined these \"{$var}\" properties so your value = \"${val}\" <br/>";
     }
@@ -73,8 +73,8 @@ class mymagictwo{
 }
 
 class mymagicthree{
-    //class object invoke
-    //class object ko method lo invoke loke yin
+    //! class object invoke
+    //! class object ko method lo invoke loke yin
     public function __invoke(){
         echo "Hello sir I am working cuz you trying to print out your class object as method. <br/>";
     }
@@ -90,11 +90,11 @@ class mymagicfour{
 }
 
 class mymagicfive{
-    //serialize
+    //! serialize
     public $data;
     public function __construct(){
         $this -> data = [1,2,3,4,5];
-    }
+    }   
 
     //do serialize auto making
     public function __sleep(){

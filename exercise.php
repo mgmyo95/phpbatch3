@@ -1,81 +1,49 @@
 <?php 
-date_default_timezone_set('Asia/Yangon');
-ini_set('display_errors',1);
 
-class mymagicconstant{
+class myclone{
 
-    public function getclassname1(){
-        echo __CLASS__ . "<br/>";
-    }   
-
-    public function getclassname2(){
-        echo get_class($this) . "<br/>";
+    public function project($name){
+        echo "I created a new {$name} project . <br/>";
     }
 
-    public function getfunname(){
-        echo __FUNCTION__ . "<br/>";
+    public function task(){
+        echo "I am new task <br/>";
     }
 
-    public static function getfunname2(){
-        echo __FUNCTION__ . "<br/>";
+    public function __call($method,$val){
+        echo "You not yet defined these \"{$method}\" Method so your value = "."<pre>".print_r($vals,true)."</pre>"."is here <br/>"; 
     }
 
-    public function getmethod1(){
-        echo __METHOD__ . "<br/>";
+    public static function exam(){
+        echo "I am new exam <br/>";
     }
 
-    public static function getmethod2(){
-        echo __METHOD__ . "<br/>";
+    public static function __callstatic($method,$val){
+        echo "You not yet defined these \"{$method}\" Static Method so your value = "."<pre>".print_r($vals,true)."</pre>"."is here <br/>"; 
     }
 
-    public function getdir(){
-        echo __DIR__ . "<br/>";
-    }
-
-    public function getfile(){
-        echo __FILE__ . "<br/>";
-    }
-
-    public function getline(){
-        echo __LINE__ . "<br/>";
-    }
-
-}
-
-trait access{
-
-    public $email = "kyaw@gmail.com";
-    private $password = "123456";
-
-    //! __trait__ must be parent trait 
-    public function gettrait(){
-        echo __TRAIT__ . "<br/>";
-    }
-
-}
-
-class auth{
-    use access;
-    public function login(){
-        echo "This is user login. Email is {$this -> email} and password is {$this -> password} <br/>";
-    }
 }
 
 echo "This is magic constant <br/>";
-$obj = new mymagicconstant();
-$obj -> getclassname1();  //! mymagicconstant
-$obj -> getclassname2();  //! mymagicconstant
-$obj -> getfunname();  //! getfunname
-$obj -> getfunname2(); //! getfunname2
-$obj -> getmethod1();  //! mymagicconstant::getmethod1
-$obj -> getmethod2();  //! mymagicconstant::getmethod2
-$obj -> getdir();  //! C:\xampp\htdocs\phpbatch3
-$obj -> getfile();  //! C:\xampp\htdocs\phpbatch3\exercise.php
-$obj -> getline();  //! 40
+$obj = new myclone();
+$obj -> project('POS');
+$obj2 = clone $obj;
+$obj2 -> project('E-wallet');
 echo "<hr/>";
 
-$obj2 = new auth();
-$obj2 -> gettrait();
+//! method_exists(classname string,methodname string)
+
+if(method_exists("myclone",'project')){
+    $obj -> task();
+}else{
+    $obj -> tasks();
+}
+
+if(method_exists(new myclone,'exam')){
+    $obj -> exam();
+}else{
+    $obj -> exams();
+}
 
 
 
