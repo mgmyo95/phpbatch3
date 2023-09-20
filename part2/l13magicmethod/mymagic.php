@@ -52,9 +52,10 @@ class mymagicone{
 }
 
 class mymagictwo{
-    //method 
-    //For Non-static Method 
-    //__call(two argument)
+    //* method 
+    //* For Non-static Method 
+    //* __call(two argument)
+    
     public function __call($method,$vals){
         // echo "You not yet defined these \"{$method}\" Method so your value = \"${$vals}\" is here <br/>";
 

@@ -565,7 +565,7 @@ echo var_dump(sizeof($colors)); //int
 
 echo "<hr/>";
 
-//=>serialize() vs unserialize()
+//? =>serialize() vs unserialize()
 $staffs = [
     ['aung aung','maung maung','kyaw kyaw','tun tun','thura'],
     ['su su','yu yu','nu nu','aye aye','hla hla']
