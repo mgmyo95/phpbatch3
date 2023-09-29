@@ -74,30 +74,15 @@ class myencryption implements encrypt{
 
     }
 
-    public function passwordrehash(){
-        $plaintext = "password123";
-        $enccode = password_hash($plaintext,PASSWORD_DEFAULT);   
-        echo "Password hash with PASSWORD_DEFAULT = " . $enccode . "<br/>";
-
-        //['cost'] keyword 
-
-        if(password_needs_rehash($enccode,PASSWORD_DEFAULT,['cost'=>12])){
-            $rehashed = password_hash($plaintext,PASSWORD_DEFAULT,['cost'=>12]);
-            echo $rehashed;
-            echo "<br/>";
-            echo strlen($rehashed) . "<br/>"; //60
-        }else{
-            echo "No Need to rehash";
-        }
-
-    }
+    
 
     public function passwordmd5(){
-        // md5 = Message Digest
-        // =>md5(string,raw)
-        //NOTE::Raw Optional(TRUE,true,FALSE,false)
-        // TRUE/true = Raw 16 characters binary format // P��H���H�dZ�d�N
-        // FALSE/false = DEFAULT . 32 Characters hax number (string and number mixed)
+        //? md5 = Message Digest
+        //? =>md5(string,raw)
+
+        //* NOTE::Raw Optional(TRUE,true,FALSE,false)
+        //* TRUE/true = Raw 16 characters binary format // P��H���H�dZ�d�N
+        //* FALSE/false = DEFAULT . 32 Characters hax number (string and number mixed)
 
         $passcode = 'Howareyou';
         echo "Before encrypt with md5 = " . $passcode . "<br/>";
@@ -128,11 +113,12 @@ class myencryption implements encrypt{
     }
 
     public function sha1(){
-        //Secure Hash Algorithm
-        // =>sha1(string,raw)
-        //NOTE::Raw Optional(TRUE,true,FALSE,false)
-        // TRUE/true = Raw 20 characters binary format // t����.NRq�E����� �
-        // FALSE/false = DEFAULT . 40 Characters hax number (string and number mixed)
+        //? Secure Hash Algorithm
+        //?  =>sha1(string,raw)
+
+        //* NOTE::Raw Optional(TRUE,true,FALSE,false)
+        //* TRUE/true = Raw 20 characters binary format // t����.NRq�E����� �
+        //* FALSE/false = DEFAULT . 40 Characters hax number (string and number mixed)
 
         $passcode = 'goodluck';
         echo "Before encrypt with sha1 = " . $passcode . "<br/>";
@@ -156,7 +142,7 @@ class myencryption implements encrypt{
 
     public function passwordcrypt(){
 
-        // =>crypt(string,)
+        //? =>crypt(string,)
         $passcode = "ilovemyjob";
         $cryptkey = "12345sdfsdf";
         // $cryptkey = "accdwerewd";  //Password do not match
@@ -170,6 +156,24 @@ class myencryption implements encrypt{
             echo "Password Match";
         }else{
             echo "Password do not match";
+        }
+
+    }
+
+    public function passwordrehash(){
+        $plaintext = "password123";
+        $enccode = password_hash($plaintext,PASSWORD_DEFAULT);   
+        echo "Password hash with PASSWORD_DEFAULT = " . $enccode . "<br/>";
+
+        //? ['cost'] keyword 
+
+        if(password_needs_rehash($enccode,PASSWORD_DEFAULT,['cost'=>12])){
+            $rehashed = password_hash($plaintext,PASSWORD_DEFAULT,['cost'=>12]);
+            echo $rehashed;
+            echo "<br/>";
+            echo strlen($rehashed) . "<br/>"; //60
+        }else{
+            echo "No Need to rehash";
         }
 
     }
@@ -200,8 +204,8 @@ class myencryption implements encrypt{
 
 
     public function customencrypt(){
-        //almost use bank
-        // openssl_encrypt(p,c,p,o,iv);       
+        //? almost use bank
+        //? openssl_encrypt(p,c,p,o,iv);       
                                            //encrypt key                        
         // openssl_encrypt(plaintext,cipher,passphrase,options,initalization vector)
 
@@ -273,7 +277,7 @@ class myencryption implements encrypt{
         $ivlen = openssl_cipher_iv_length($cipher); //is an arbitrary number 
         echo $ivlen . "<br/>"; //16
 
-        $iv = openssl_random_pseudo_bytes($ivlen);  //to get dynamic pseudo
+        $iv = openssl_random_pseudo_bytes($ivlen);  //? to get dynamic pseudo
         echo $iv . "<br/>";
 
         $hash = openssl_encrypt($plaintext,$cipher,$encryptionkey,$options,$iv);
@@ -296,7 +300,7 @@ class myencryption implements encrypt{
 
     public function customstrongdecrypt(){
 
-        // openssl_decrypt(p,c,p,o,iv);
+        //? openssl_decrypt(p,c,p,o,iv);
         $encrypted = base64_decode("XFg4icGWKkl2fzQLcoZF3kkem7fOwz1E32SZN4udO8Ik5BMgsaLXsK08virc/ucEaHo2OFRsU0pBdnZoOGphY2p1QVRZZz09");
         // echo $encrypted . "<br/>";
 

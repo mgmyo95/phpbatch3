@@ -4,9 +4,11 @@
 //just rule 
 //Modifier must be public in interface , cuz we need to overwrite 
 //A class must use the implements keyword.
+//? Note :: Can't contain properties but constant variable can.
 
 interface article{
      //interface make format 
+     const CAPTION = "This is new article for SPORT";
     public function create();
     public function read($id);
     public function update($id,$title);

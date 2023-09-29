@@ -97,7 +97,7 @@ class mymagicfive{
         $this -> data = [1,2,3,4,5];
     }   
 
-    //do serialize auto making
+    //? do serialize auto making
     public function __sleep(){
         echo "Hello sir, I am working cuz you trying to serialize. <br/>";
     }

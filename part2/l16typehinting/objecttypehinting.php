@@ -55,7 +55,7 @@ echo $objcar -> getbrand($objbrand) -> getchinabrand();
 echo $objcar -> getjpn($objbrand);
 echo $objcar -> getchn($objbrand);
 
-echo "<hr/>";
+echo "<hr/>";s
 
 
 ?>
