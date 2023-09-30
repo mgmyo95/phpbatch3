@@ -1,33 +1,67 @@
 <?php 
-declare(strict_types = 1);
-date_default_timezone_set("Asia/Yangon");
-ini_set("display_errors",1);
+declare(strict_types = 1); //? 1 = open , 0 = close 
+date_default_timezone_set('Asia/Yangon');
+ini_set('display_errors',1);
 
-class myhint{
+//? Lambda style 
 
-    public function getdata(int $x,string $y):int{
-        return $x+$y;
-    }
+function mycal($num1,$num2,$funone){
+    $total = $num1 + $num2;
+    $funone($total);
+};
 
+$fun = function($result){
+    echo "Total result is {$result} <br/>";
+};
+
+mycal(100,400,$fun);
+
+echo "This is lambda style <br/>";
+
+function showresult($addednum){
+    echo "Sum result is = {$addednum} <br/>";
 }
 
-class myhint1{
+$add = function($x,$y){
+    return $x + $y;
+};
 
-    public function getdata(float $val):float{
-        return $val;
-    }
-
-}
-
-echo "This is return type hinting <br/>";
-
-$obj = new myhint();
-echo $obj -> getdata(100,"10");
+showresult($add(5,6));
 echo "<hr/>";
 
-$obj1 = new myhint1();
-echo $obj1 -> getdata(23.33);
+echo "This is closure function <br/>";
+
+$num1 = 300;
+$num2 = 400;
+
+function colfun1($x,$y){
+    // global $num1 , $num2;
+    echo "This is regual function . my getting value is = " . $num1 + $num1 . "<br/>";
+}
+
+colfun1(100,200);
+echo "<hr/>";
+
+//? use() function 
+//? closure function() 
+
+$colfun2 = function() use($num1,$num2){
+    echo "This is regual function . my getting value is " . $num1 + $num2 . "<br/>";
+};
+
+$colfun2();
+echo "<hr/>";
+
+function result($fun){
+    $fun(); //? invoke 
+};
+
+result(function()use($num1,$num2){
+    echo "This is regual function . my getting value is " . $num1 + $num2 . "<br/>";
+});
+echo "<hr/>";
+
+
 
 
 ?>
-
