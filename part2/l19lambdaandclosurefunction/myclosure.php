@@ -60,6 +60,19 @@ result(function()use($num1,$num2){
 
 echo "<hr/>";
 
+//? Lambda with Array Walk 
+// array_walk($array,callbackfunction,parameter)
+$colors = array("a"=>"red","b"=>"green","c"=>"blue","d"=>"white","e"=>"black");
+$idx = 0;
+
+array_walk($colors,function($val,$key,$p)use(&$idx){
+    $idx++;
+    echo "Id is {$idx} / key is = {$key} and value is {$val} {$p} <br/>";
+},"color");
+
+echo "<hr/>";
+
+
 
 
 

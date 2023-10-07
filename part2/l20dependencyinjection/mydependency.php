@@ -1,18 +1,5 @@
 <?php 
-declare(strict_types = 1);
-date_default_timezone_set('Asia/Yangon');
-ini_set('display_errors',1);
 
-//? lambda with array walk 
-$colors = array('a'=>'red','b'=>'green','c'=>'blue','d'=>'coral','e'=>'crimson');
-$idx = 0;
-
-array_walk($colors,function($value,$key,$p)use(&$idx){
-    $idx++;
-    echo "ID is {$idx} / key is {$key} and value is {$value} {$p} <br/>";
-},'color');
-
-echo "<hr/>";
 
 class course{
 
@@ -23,38 +10,37 @@ class course{
     }
 
     public function getcourseidx(){
-        echo "Course idx is " . $this -> courseidx . "<br/>";
+        echo "Course Index is = " . $this -> courseidx . "<br/>";
     }
 
 }
 
 class lesson extends course{
-
     public $lessonnumber;
 
     public function __construct($val){
         $this -> lessonnumber = $val;
     }
 
-    public function getnumber(){
-        echo "Number is " . $this -> lessonnumber . "<br/>";
+    public function getlessonnumber(){
+        echo "Lesson Number is " . $this -> lessonnumber . "<br/>";
     }
-
 }
 
-echo "This is my dependency injection <br/>";
+echo "This is my dependency Injection <br/>";
 
 $getcourse = new course(1);
-$getcourse -> getcourseidx();
+$getcourse -> getcourseidx(); //? Course Index is = 1
+// $getcourse -> getlessonnumber(); //! Error 
 echo "<br/>";
 
 $getlesson = new lesson(10);
-$getlesson -> getnumber();
-$getlesson -> getcourseidx();
+$getlesson -> getlessonnumber(); //? Course Index is = 10
+$getlesson -> getcourseidx(); //? Course Index is = 
 
 echo "<hr/>";
 
-//todo => Parent to Child 
+//Todo => Parent to Chind
 
 class vehicle{
 
@@ -66,16 +52,16 @@ class vehicle{
         $this -> modelnumber = $val;
         $this -> evcarobj = new evcar($price);
         $this -> carmodeobj = new carmode($type);
+
     }
 
     public function getmodelnumber(){
-        echo "Vehicle Number is " . $this -> modelnumber . "<br/>";
+        echo "Vehicle Number is = " . $this -> modelnumber . "<br/>";
     }
 
 }
 
 class evcar extends vehicle{
-
     public $price;
 
     public function __construct($val){
@@ -83,9 +69,8 @@ class evcar extends vehicle{
     }
 
     public function getprice(){
-        echo "Evcar price is " . $this -> price . "<br/>";
+        echo "Ev car Price is " . $this -> price . "<br/>";
     }
-
 }
 
 class carmode extends vehicle{
@@ -100,61 +85,64 @@ class carmode extends vehicle{
     }
 }
 
-$getvehicle = new vehicle(11111,20000,'luxury');
+$getvehicle = new vehicle(11111,20000,'Luxury');
 $getvehicle -> getmodelnumber();
-$getvehicle -> evcarobj -> getprice();
-
-echo "<br/>";
-
 $getevcar = new evcar(10000);
-$getevcar -> getprice();
+$getevcar -> getprice();  //? Ev car price is = 10000
+$getvehicle -> evcarobj -> getprice();  //? ev car price is = 20000
+$getvehicle -> carmodeobj -> gettype();  //? car type is = luxury
 
 echo "<hr/>";
 
-// $getmode = new carmode();
-// $getmode -> gettype();
-$getvehicle -> carmodeobj -> gettype();
-echo "<hr/>";
+//todo => child to parent
 
-//todo => Child to Parent
 
 class phone{
 
     public $brand;
+
     public function __construct($val){
         $this -> brand = $val;
     }
 
     public function getbrand(){
-        echo "Phone brand is " . $this -> brand . "<br/>";
+        echo "Phone Brand is = " . $this -> brand . "<br/>";
     }
 
 }
 
 class phonemodel extends phone{
-
     public $price;
+                                   //?class obj 
     public function __construct($val,phone $phone){
         $this -> price = $val;
-        $this -> brand = $phone -> brand;
+        // $this -> brand = $phone -> brand;  //? to properties 
+        $this -> brand = $phone -> getbrand();  //? to properties 
     }
 
     public function getprice(){
-        echo "Phone price is " . $this -> price . "<br/>";
+        echo "Phone Price is " . $this -> price . "<br/>";
     }
-
 }
 
-$getphone = new phone('oppo');
+$getphone = new phone("iphone");
 $getphone -> getbrand();
+
+$getphonemodel = new phonemodel(500,$getphone);
+$getphonemodel -> getprice();
+
+// $getphonemodel -> getbrand();  //? Phone Brand is = iphone
+//? Passing by properties
+// echo $getphonemodel -> brand;  //? iphone
+
+//? Passing by member method 
+echo $getphonemodel -> brand;  //? iphone 
+
+
+
+
+
 echo "<hr/>";
-
-$getmodel = new phonemodel(100,$getphone);
-$getmodel -> getprice();
-
-$getmodel -> getbrand();
-
-
 
 
 

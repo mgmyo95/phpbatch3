@@ -121,9 +121,21 @@ function myfun6(int ...$numbers):int{
 }
 
 echo myfun6(1,2,3);
-
-
-
 echo "<hr/>";
+
+//? => null coalescing operator ( ?? ) 
+
+function myfun7(...$val){
+    echo $val[1] ? "Valid Data" : "No Data";
+    echo "<br/>";
+
+    echo $val[1] ?? "No Data";
+
+}
+
+myfun7("Hello World","Dream World"); //? Valid data Dream World
+myfun7("Hello World");  //? No Data No Data  
+echo "<hr/>";
+
 
 ?>

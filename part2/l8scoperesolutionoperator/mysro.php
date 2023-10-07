@@ -1,8 +1,8 @@
 <?php 
 
-//:: = sro = scope resolution operator
+//? :: = sro = scope resolution operator
 
-//Note :: define() can't set in class method 
+//? Note :: define() can't set in class method 
 
 class mysro{
         //properties
