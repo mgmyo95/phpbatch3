@@ -116,8 +116,8 @@ class phonemodel extends phone{
                                    //?class obj 
     public function __construct($val,phone $phone){
         $this -> price = $val;
-        // $this -> brand = $phone -> brand;  //? to properties 
-        $this -> brand = $phone -> getbrand();  //? to properties 
+        $this -> brand = $phone -> brand;  //? to properties 
+        // $this -> brand = $phone -> getbrand();  //? to properties 
     }
 
     public function getprice(){
@@ -137,12 +137,8 @@ $getphonemodel -> getprice();
 
 //? Passing by member method 
 echo $getphonemodel -> brand;  //? iphone 
-
-
-
-
-
 echo "<hr/>";
+
 
 
 
