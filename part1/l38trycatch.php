@@ -34,7 +34,7 @@ function mycolour($col){
     if($col !== "red"){
         throw new Exception("I hate $col color.");
     };
-    return "Yeach! my fav color is $col color";
+    return "Yeah! my fav color is $col color";
 };
 
 // try{

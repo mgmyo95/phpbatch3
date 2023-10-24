@@ -26,7 +26,7 @@
         // echo "Connected Successfully";
         // echo "<hr/>";
 
-        //Data Insert 
+        //? Data Insert 
         $stmt = "INSERT INTO users(name,email,password) VALUE(?,?,?)";
         $insertstmt = mysqli_prepare($conn,$stmt);
         mysqli_stmt_bind_param($insertstmt,"sss",$name,$email,$password);
@@ -40,7 +40,7 @@
     function textfilter($data){
         $data = trim($data);
         $data = htmlspecialchars($data);
-        $data = stripslashes($data);
+        $data = stripslashes($data);  //? special ascase character
         return $data;
     }
 
