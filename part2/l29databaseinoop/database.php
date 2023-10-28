@@ -99,7 +99,7 @@ class Database{
 
     //? get database row count 
     public function dbrowcount(){
-        return $this -> stmt -> rowCount();
+        return $this -> rowCount();
     }
 
 
